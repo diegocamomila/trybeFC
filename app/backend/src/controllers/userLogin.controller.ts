@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import UserloginService from '../Services/UserLogin.service';
 
 export default class UserLoginController {
+  static execute: any;
   constructor(
     private userloginService: UserloginService,
   ) {}

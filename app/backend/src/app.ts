@@ -1,4 +1,6 @@
 import * as express from 'express';
+import HandlerError from './middlewares/handlerError';
+import UserRoute from './routes/userLogin.route';
 
 class App {
   public app: express.Express;
@@ -22,6 +24,8 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use('/login', UserRoute);
+    this.app.use(HandlerError);
   }
 
   public start(PORT: string | number):void {
