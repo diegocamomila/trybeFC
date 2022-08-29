@@ -8,3 +8,12 @@ export interface IUserDTO extends ILoginDTO {
   username: string;
   role: string;
 }
+
+export interface IAuthDTO {
+  token: string;
+  authorization?: string ;
+  // header(name: 'set-cookie'): string[] | undefined;
+  // get(name: 'set-cookie'): string[] | undefined;
+
+}
+// { (name: "set-cookie"): string[] | undefined; (name: string): string | undefined; }

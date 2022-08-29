@@ -1,18 +1,19 @@
-import { Request, Response, NextFunction } from 'express';
-import UserloginService from '../Services/UserLogin.service';
+import { response } from 'express';
+import { ILoginDTO } from '../repositoriesDTO/userLoginServiceDTO';
+import { IUserPasswordRepository } from '../repositories/IUserPassword.repository';
+import { IUserCheckRepository } from '../repositories/IUserCheckToken.repository';
 
 export default class UserLoginController {
-  static execute: any;
-  constructor(
-    private userloginService: UserloginService,
-  ) {}
+  static userPasswordRepository: IUserPasswordRepository;
+  static userCheckRepository: IUserCheckRepository;
 
-  async execute(req: Request, res: Response, next: NextFunction) {
-    try {
-      const token = await this.userloginService.execute(req.body);
-      return res.status(200).json({ token });
-    } catch (error) {
-      return next(error);
-    }
+  static async handlerLogin(data:ILoginDTO) {
+    const token = await this.userPasswordRepository.validateLogin(data);
+    return response.status(200).json({ token });
+  }
+
+  static async validateToken(authorization?: string) {
+    const role = await this.userCheckRepository.validatePassword(authorization);
+    return response.status(200).json({ role });
   }
 }
