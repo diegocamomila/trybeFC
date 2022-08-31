@@ -1,5 +1,5 @@
 import * as express from 'express';
-import LoginRoutes from './userLogin.route';
+import LoginRoutes from './LoginUser.route';
 
 const routes = express.Router();
 

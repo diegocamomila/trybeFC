@@ -4,6 +4,7 @@
 
 import User from '../../database/models/user';
 import IUser from '../LoginService/loginDTO.service';
+import IUserDTO from '../LoginService/userDTO.service';
 import ILoginService from './ILogin.service';
 
 export default class LoginService implements ILoginService {
@@ -14,10 +15,10 @@ export default class LoginService implements ILoginService {
   //   return result;
   // }
 
-  async checkUser(email: string): Promise<IUser | undefined> {
+  async checkUser(email: string): Promise<IUserDTO | undefined> {
     const resultUser = await this.userModel.findOne({ where: { email } });
 
-    return resultUser as IUser;
+    return resultUser as IUserDTO;
   }
 
   // checkAuthorizatin(token: string): Promise<boolean>{

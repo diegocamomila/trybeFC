@@ -1,6 +1,7 @@
-import IUser from '../LoginService/loginDTO.service';
+import IUserDTO from '../LoginService/userDTO.service';
 
 export default interface ILoginService {
   // checkFields(email: string, password: string): Promise<boolean>;
-  checkUser(email: string): Promise<IUser | undefined>;
+  checkUser(email: string): Promise<IUserDTO | undefined>;
+  // handlerLogin(request: Request, response: Response): Promise<Response>
 }

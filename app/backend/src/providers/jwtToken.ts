@@ -1,13 +1,13 @@
 import * as Jwt from 'jsonwebtoken';
 // import * as dotenv from 'dotenv';
 import * as bcrypt from 'bcryptjs';
-import IUser from '../services/LoginService/loginDTO.service';
+import IUserDTO from '../services/LoginService/userDTO.service';
 import IJwtToken from './IJwtToken';
 
 const SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
 export default class JwtToken implements IJwtToken {
-  tokenGenerator = (user:Omit<IUser, 'password'>): string => {
+  tokenGenerator = (user:Omit<IUserDTO, 'password'>): string => {
     const newToken = Jwt.sign({ data: user }, SECRET, {
       expiresIn: '7d',
       algorithm: 'HS256',

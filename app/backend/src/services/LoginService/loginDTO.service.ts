@@ -1,7 +1,4 @@
-export default interface IUserDTO {
-  id?: number;
-  username: string;
-  role: string;
+export default interface ILoginDTO {
   email: string;
   password: string;
 }
