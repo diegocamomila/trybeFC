@@ -3,18 +3,19 @@ import JwtToken from '../../providers/jwtToken';
 import LoginService from '../LoginImplementation/login.service';
 import LoginUserService from './LoginUser.service';
 
-const logimSrvice = new LoginService();
+const logimService = new LoginService();
 const jwtToken = new JwtToken();
 
 const loginUserService = new LoginUserService(
-  logimSrvice,
+  logimService,
   jwtToken,
 );
-const controller = new LoginUserController(
+
+const loginUserController = new LoginUserController(
   loginUserService,
 );
 
 export default {
   loginUserService,
-  controller,
+  loginUserController,
 };

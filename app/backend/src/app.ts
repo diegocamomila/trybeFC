@@ -1,6 +1,6 @@
 import * as express from 'express';
 import HandlerError from './middlewares/handlerError';
-import router from './routes/index';
+import routes from './routes/index';
 
 class App {
   public app: express.Express;
@@ -24,7 +24,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    this.app.use(router);
+    this.app.use(routes);
     this.app.use(HandlerError);
   }
 
