@@ -1,6 +1,6 @@
 import * as express from 'express';
 import HandlerError from './middlewares/handlerError';
-import router from './routes/userLogin.route';
+import router from './routes/index';
 
 class App {
   public app: express.Express;

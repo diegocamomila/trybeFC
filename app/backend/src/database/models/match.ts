@@ -3,12 +3,12 @@ import db from '.';
 import Team from './team';
 
 class Match extends Model {
-  public id: number;
-  public  homeTeam: number;
-  public  awayTeam: number;
-  public homeTeamGoals: number;
-  public  awayTeamGoals: number;
-  public inProgress: boolean;
+  id!: number;
+  homeTeam!: number;
+  awayTeam!: number;
+  homeTeamGoals!: number;
+  awayTeamGoals!: number;
+  inProgress!: boolean;
 }
 
 Match.init({
@@ -31,12 +31,14 @@ Match.init({
 }, {
   underscored: true,
   sequelize: db,
-  modelName: 'match',
+  modelName: 'matches',
   timestamps: false,
 });
 
-Team.hasMany(Match, { foreignKey: 'homeTeam', as: 'teamHome' });
-Team.hasMany(Match, { foreignKey: 'awayTeam', as: 'teamAway' });
-
+Team.hasMany(Match, { foreignKey: 'homeTeam', as: 'homeTeam' });
 Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
+
+Team.hasMany(Match, { foreignKey: 'awayTeam', as: 'awayTeam' });
 Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
+
+export default Match;
