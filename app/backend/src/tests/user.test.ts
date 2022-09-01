@@ -10,12 +10,6 @@ import { Response } from 'superagent';
 chai.use(chaiHttp);
 
 const { expect } = chai;
-
-  // const validField = {  
-  //   email: 'admin@admin.com',
-  //   password: 'secret_admin',
-  // }
-
   describe('testando Login', () => {
     describe('testando rota /login', () => {
       it('Se falha caso campo e-mail nao esteja prenchidos', async () => {

@@ -2,7 +2,7 @@ import * as express from 'express';
 import { loginUserController } from '../services/LoginService';
 
 const routes = express.Router();
-// routes.post('/', loginUserController.handlerLogin);
+// routes.post('/', loginUserController.handlerLogin); com classe assim nao vai
 
 routes.post('/', (request, response, next) => {
   loginUserController.handlerLogin(request, response, next);
