@@ -18,8 +18,14 @@ export default class LoginUserController {
     }
   }
 
-  // static async validateToken(authorization?: string) {
-  //   const role = await this.validatePassword(authorization);
-  //   return response.status(200).json({ role });
-  // }
+  async validateToken(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { authorization } = request.headers;
+      const role = await this.loginUserServer.check(authorization);
+      return response.status(200).json({ role });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
+// teste.

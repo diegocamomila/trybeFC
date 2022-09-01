@@ -20,8 +20,8 @@ export default class JwtToken implements IJwtToken {
     return payload;
   };
 
-  validatePassword = (token: string) => {
-    const payload = Jwt.verify(token, SECRET);
+  validatePassword = (authorization: string) => {
+    const payload = Jwt.verify(authorization, SECRET);
     return payload;
   };
 }

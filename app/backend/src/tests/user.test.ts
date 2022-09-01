@@ -5,85 +5,89 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import LoginUserService from '../services/LoginService/LoginUser.service';
-// import Users from '../database/models/user';
-// import IUserDTO from '../services/LoginService/userDTO.service';
-// import HandlerError from '../utils/handlerError';
-// import Example from '../database/models/ExampleModel';
-
-// import { Response } from 'superagent';
+import { Response } from 'superagent';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
+  // const validField = {  
+  //   email: 'admin@admin.com',
+  //   password: 'secret_admin',
+  // }
 
-  const invalidField = {
-    email: '',
-    password: '',
-  }
-
-  const validField = {  
-    email: 'admin@admin.com',
-    password: 'admin',
-  }
-
-  const notRegistred = {
-    email: 'admin@admin.com',
-    password: '',
-  }
-
-  const userRegistred = {
-    email: 'admin@admin.com',
-    password: 'admin',
-  }
-
-  const user = {
-    id: 1,
-    username: 'Admin',
-    role: 'admin',
-    email: 'admin@admin.com',
-    password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW',
-  }
-
-  describe('Teste Login', async () => {
-    it('The Login and Password fields must be filled in', async () => {
-      sinon.stub(LoginUserService.prototype, 'execute')
+  describe('testando Login', () => {
+    describe('testando rota /login', () => {
+      it('Se falha caso campo e-mail nao esteja prenchidos', async () => {
+        const response = await chai.request(app)
+          .post('/login')
+          .send({
+            email: '',
+            password: 'secret_admin'
+          }).then((res) => res)
+    
+          expect(response.status).to.be.equal(400);
+        expect(response.body).to.deep.equal({message:'All fields must be filled'});
       });
-  
-      const response = await chai.request(app)
-      .post('/login').send(invalidField);
-  
-      expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal([]);
-      expect(response.body.message).to.equal('All fields must be filled');
-  
-      sinon.restore();
+
+      it('Se falha caso campo password nao esteja prenchidos', async () => {
+        const response = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'admin@admin.com',
+            password: ''
+          }).then((res) => res)
+
+        expect(response.status).to.be.equal(400);
+        expect(response.body).to.deep.equal({message:'All fields must be filled'});
+      });
+
+      it('Se falha caso campo email e password nao esteja prenchidos', async () => {
+        const response = await chai.request(app)
+          .post('/login')
+          .send({
+            email: '',
+            password: ''
+          }).then((res) => res)
+
+        expect(response.status).to.be.equal(400);
+        expect(response.body).to.deep.equal({message:'All fields must be filled'});
+      });
+
+      it('Se falha caso campo email invaidos', async () => {
+        const response = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'min@admin.com',
+            password: 'secret_admin'
+          }).then((res) => res)
+
+        expect(response.status).to.be.equal(401);
+        expect(response.body).to.deep.equal({message:'Incorrect email or password'});
+      });
+
+      it('Se falha caso campo password invaidos', async () => {
+        const response = await chai.request(app)
+          .post('/login')
+          .send({
+            email: 'admin@admin.com',
+            password: 'secret-admin'
+          }).then((res) => res)
+
+        expect(response.status).to.be.equal(401);
+        expect(response.body).to.deep.equal({message:'Incorrect email or password'});
+      });
     });
 
-    // it('check the Login and Password fields if filled in correctly', async () => {
-    //   sinon.stub(LoginUserService.prototype, 'checkUser').resolves(Users as IUserDTO)
-    //   });
-  
-    //   const response = await chai.request(app)
-    //   .post('/login').send(validField);
-  
-    //   expect(response.status).to.be.equal(401);
-    //   expect(response.body).to.be.deep.equal([]);
-    //   expect(response.body.message).to.equal('Incorrect email or password');
-  
-    //   sinon.restore();
-  
-
-    // it('check if it returns the Token', async () => {
-    //   sinon.stub(Users, 'findOne').resolves(user as Users)
-
-    //   });
-  
-    //   const response = await chai.request(app)
-    //   .post('/login').send(validField);
-  
-    //   expect(response.status).to.be.equal(401);
-    //   expect(response.body).to.be.deep.equal([]);
-    //   expect(response.body.message).to.equal('Incorrect email or password');
-  
-    //   sinon.restore();
+    describe('testando rota /login/validate', () => {
+        it('Se falha caso tentar login sem token', async () => {
+          const response = await chai.request(app)
+            .get('/login/validate')
+            .send({
+              authorization: '',
+          }).then((res) => res)
+    
+        expect(response.body).to.deep.equal({message:'Token not found'});
+      });
+    });
+  });

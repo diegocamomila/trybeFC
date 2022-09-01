@@ -7,5 +7,5 @@ export default interface IJwtToken {
 
   checkToken(token: string, tokenUser:string): any;
 
-  validatePassword(token: string): any;
+  validatePassword(authorization: string): any;
 }

@@ -8,7 +8,8 @@ routes.post('/', (request, response, next) => {
   loginUserController.handlerLogin(request, response, next);
 });
 
-// router.get('/validate', (request, _response) => UserLoginController
-//   .validateToken(request.headers.authorization));
+routes.get('/validate', (request, response, next) => {
+  loginUserController.validateToken(request, response, next);
+});
 
 export default routes;
