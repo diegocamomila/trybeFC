@@ -6,12 +6,12 @@ import LoginUserService from './LoginUser.service';
 const logimService = new LoginService();
 const jwtToken = new JwtToken();
 
-const loginUserService = new LoginUserService(
+export const loginUserService = new LoginUserService(
   logimService,
   jwtToken,
 );
 
-const loginUserController = new LoginUserController(
+export const loginUserController = new LoginUserController(
   loginUserService,
 );
 

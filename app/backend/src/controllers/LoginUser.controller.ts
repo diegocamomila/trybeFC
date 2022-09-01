@@ -1,15 +1,15 @@
 // import ILoginDTO from '../services/LoginService/loginDTO.service';
-import { response } from 'express';
+
+import { Request, Response } from 'express';
 import LoginUserServer from '../services/LoginService/LoginUser.service';
 
 export default class LoginUserController {
-  static handlerLogin: any;
   constructor(
     private loginUserServer: LoginUserServer,
   ) {}
 
-  async handlerLogin(email:string, password: string): Promise<any> {
-  //  { email, password } = request.body;
+  async handlerLogin(request: Request, response: Response): Promise<Response | null> {
+    const { email, password } = request.body;
     const token = await this.loginUserServer.execute(email, password);
     return response.status(200).json({ token });
   }

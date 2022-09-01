@@ -1,14 +1,14 @@
 import * as express from 'express';
-import LoginUserController from '../controllers/LoginUser.controller';
+import { loginUserController } from '../services/LoginService';
 
-const router = express.Router();
-// router.post('/', LoginUserController.handlerLogin);
+const routes = express.Router();
+routes.post('/', loginUserController.handlerLogin);
 
-router.post('/', (request, response) => {
-  LoginUserController.handlerLogin(request, response);
-});
+// routes.post('/', (request, response) => {
+//   loginUserController.handlerLogin(request, response);
+// });
 
 // router.get('/validate', (request, _response) => UserLoginController
 //   .validateToken(request.headers.authorization));
 
-export default router;
+export default routes;
