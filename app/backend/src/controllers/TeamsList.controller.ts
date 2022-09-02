@@ -17,9 +17,9 @@ export default class TeamsListController {
 
   async findById(request: Request, response: Response, next: NextFunction) {
     try {
-      const { id } = request.body;
-      const teams = await this.teamsListService.executeFindById(id);
-      return response.status(200).json({ teams });
+      const { id } = request.params;
+      const teams = await this.teamsListService.executeFindById(Number(id));
+      return response.status(200).json(teams);
     } catch (err) {
       next(err);
     }
