@@ -1,44 +1,53 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('matches', {
       id: {
-        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       homeTeam: {
-        allowNull: false,
         field: 'home_team',
-        type: Sequelize.INTEGER
-      },
-      awayTeam: {
         allowNull: false,
-        field: 'away_team',
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        eferences: {
+          model: 'Team',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       homeTeamGoals: {
-        allowNull: false,
         field: 'home_team_goals',
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      awayTeam: {
+        field: 'away_team',
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        eferences: {
+          model: 'Team',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       awayTeamGoals: {
-        allowNull: false,
         field: 'away_team_goals',
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       inProgress: {
-        allowNull: false,
         field: 'in_progress',
+        allowNull: false,
         type: Sequelize.BOOLEAN,
-        defaultValue: true
-      }
+        defaultValue: 0,
+      },
     });
   },
-
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface)=> {
     await queryInterface.dropTable('matches');
-  }
-};
+  },
+}

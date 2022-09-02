@@ -6,10 +6,10 @@ export default class TeamsListController {
     private teamsListService: TeamsListService,
   ) {}
 
-  async validateToken(request: Request, response: Response, next: NextFunction) {
+  async listAll(request: Request, response: Response, next: NextFunction) {
     try {
       const teams = await this.teamsListService.executeListAll();
-      return response.status(200).json({ teams });
+      return response.status(200).json(teams);
     } catch (error) {
       next(error);
     }
@@ -18,8 +18,8 @@ export default class TeamsListController {
   async findById(request: Request, response: Response, next: NextFunction) {
     try {
       const { id } = request.body;
-      const team = await this.teamsListService.executeFindById(id);
-      return response.status(200).json(team);
+      const teams = await this.teamsListService.executeFindById(id);
+      return response.status(200).json({ teams });
     } catch (err) {
       next(err);
     }
