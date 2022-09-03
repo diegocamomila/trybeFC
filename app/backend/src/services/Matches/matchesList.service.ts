@@ -13,11 +13,10 @@ export default class MatchesListService {
   }
 
   async gameInProgress(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO> {
-    const homeTeam = await this.matchesService.findByTeam(dataGameInProgress.homeTeam);
-    const awayTeam = await this.matchesService.findByTeam(dataGameInProgress.awayTeam);
-    if (!homeTeam?.id || !awayTeam?.id) {
+    if (!dataGameInProgress.homeTeam || !dataGameInProgress.awayTeam) {
       throw new ObjError(404, 'There is no team with such id!');
-    } else if (dataGameInProgress.homeTeam === dataGameInProgress.awayTeam) {
+    }
+    if (dataGameInProgress.homeTeam === dataGameInProgress.awayTeam) {
       throw new ObjError(
         401,
         'It is not possible to create a match with two equal teams',

@@ -29,7 +29,7 @@ export default class MatchesService implements IMatchesService {
   // }
 
   async newGame(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO> {
-    const Game = await this.matchesModel.create({ ...dataGameInProgress, inProgress: 1 });
+    const Game = await this.matchesModel.create({ ...dataGameInProgress, inProgress: true });
     return Game;
   }
 }
