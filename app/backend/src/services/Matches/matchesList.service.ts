@@ -12,18 +12,22 @@ export default class MatchesListService {
     return reulteGetAllMatchers;
   }
 
-  async gameInProgress(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO> {
-    if (!dataGameInProgress.homeTeam || !dataGameInProgress.awayTeam) {
+  async executeSaveInProgress(data:IMatchesDTO): Promise<IMatchesDTO> {
+    const resultHomeTeam = await this.matchesService.findByTeam(data.homeTeam);
+    const resultAwayTeam = await this.matchesService.findByTeam(data.awayTeam);
+
+    if (data.homeTeam === data.awayTeam) {
+      throw new ObjError(401, 'It is not possible to create a match with two equal teams');
+    }
+    if (resultHomeTeam === null || resultAwayTeam === null) {
       throw new ObjError(404, 'There is no team with such id!');
     }
-    if (dataGameInProgress.homeTeam === dataGameInProgress.awayTeam) {
-      throw new ObjError(
-        401,
-        'It is not possible to create a match with two equal teams',
-      );
-    } else {
-      const newGameInProgress = await this.matchesService.newGame(dataGameInProgress);
-      return newGameInProgress;
-    }
+
+    const newGameInProgress = await this.matchesService.saveNewGame(data);
+    return newGameInProgress;
+  }
+
+  async executeUpdateInProgress(id: number) {
+    await this.matchesService.updateNewGame(id);
   }
 }

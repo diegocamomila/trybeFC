@@ -6,7 +6,6 @@ import Team from '../../../database/models/team';
 import Matches from '../../../database/models/match';
 import { IMatchesDTO, IMatchesListDTO } from '../matchesDTO.service';
 import IMatchesService from './IMatches.service';
-// import ITeamsDTO from '../../TeamService/teamsDTO.service';
 
 export default class MatchesService implements IMatchesService {
   private matchesModel = Matches;
@@ -22,14 +21,17 @@ export default class MatchesService implements IMatchesService {
     return matchers as unknown as IMatchesListDTO[];
   }
 
-  // async findByTeam(idteam: number): Promise< ITeamsDTO | null> {
-  //   const result = await this.teamModel.findOne({ where: { id: idteam } });
-  //   console.log(`${result}teste`);
-  //   return (result);
-  // }
-
-  async newGame(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO> {
+  async saveNewGame(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO> {
     const Game = await this.matchesModel.create({ ...dataGameInProgress, inProgress: true });
     return Game;
+  }
+
+  async updateNewGame(id: number): Promise<void> {
+    await this.matchesModel.update({ inProgress: false }, { where: { id } });
+  }
+
+  async findByTeam(id: number): Promise< IMatchesDTO | null> {
+    const resultMatches = await this.matchesModel.findOne({ where: { id } });
+    return resultMatches;
   }
 }

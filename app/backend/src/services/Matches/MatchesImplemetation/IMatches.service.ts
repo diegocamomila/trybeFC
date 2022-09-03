@@ -1,8 +1,8 @@
 import { IMatchesDTO, IMatchesListDTO } from '../matchesDTO.service';
-// import ITeamsDTO from '../../TeamService/teamsDTO.service';
 
 export default interface IMatchesService {
   listAll(): Promise<IMatchesListDTO[]>
-  // findByTeam(team: number): Promise< ITeamsDTO | null>
-  newGame(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO>
+  saveNewGame(data:IMatchesDTO): Promise<IMatchesDTO>
+  updateNewGame(id: number): Promise<void>
+  findByTeam(id: number): Promise< IMatchesDTO | null>
 }

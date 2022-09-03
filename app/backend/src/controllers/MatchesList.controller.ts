@@ -15,13 +15,23 @@ export default class MatchesListController {
     }
   }
 
-  async create(request: Request, response: Response, next: NextFunction) {
+  async saveInProgress(request: Request, response: Response, next: NextFunction) {
     try {
       // const { dataGameInProgress } = request.body;
-      const newGame = await this.matchesListService.gameInProgress(request.body);
+      const newGame = await this.matchesListService.executeSaveInProgress(request.body);
       return response.status(201).json(newGame);
     } catch (error) {
       next(error);
+    }
+  }
+
+  async updateInProgress(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params;
+      await this.matchesListService.executeUpdateInProgress(Number(id));
+      return response.status(200).json({ message: 'Finished' });
+    } catch (err) {
+      next(err);
     }
   }
 }
