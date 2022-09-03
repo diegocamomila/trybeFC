@@ -31,7 +31,7 @@ export default class LoginUserServer {
     }
 
     const validaToken = await this.jwtToken.validatePassword(authorization);
-    console.log(validaToken);
+    // console.log(validaToken);
     const { data } = validaToken as JwtPayload;
     return data.role;
   }

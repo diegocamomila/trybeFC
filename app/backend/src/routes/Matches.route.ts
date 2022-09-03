@@ -6,4 +6,8 @@ const routes = express.Router();
 routes.get('/', (request, response, next) => {
   matchesListController.listAll(request, response, next);
 });
+
+routes.post('/', (request, response, next) => {
+  matchesListController.create(request, response, next);
+});
 export default routes;

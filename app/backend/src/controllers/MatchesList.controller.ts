@@ -14,4 +14,14 @@ export default class MatchesListController {
       next(error);
     }
   }
+
+  async create(request: Request, response: Response, next: NextFunction) {
+    try {
+      // const { dataGameInProgress } = request.body;
+      const newGame = await this.matchesListService.gameInProgress(request.body);
+      return response.status(201).json(newGame);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
