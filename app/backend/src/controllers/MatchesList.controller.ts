@@ -34,4 +34,14 @@ export default class MatchesListController {
       next(err);
     }
   }
+
+  async updateScore(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params;
+      await this.matchesListService.executeUpdateScore(Number(id), request.body);
+      return response.status(200).json({ message: 'Finished' });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

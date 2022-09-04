@@ -4,7 +4,7 @@
 
 import Team from '../../../database/models/team';
 import Matches from '../../../database/models/match';
-import { IMatchesDTO, IMatchesListDTO } from '../matchesDTO.service';
+import { IGoalsDTO, IMatchesDTO, IMatchesListDTO } from '../matchesDTO.service';
 import IMatchesService from './IMatches.service';
 
 export default class MatchesService implements IMatchesService {
@@ -33,5 +33,9 @@ export default class MatchesService implements IMatchesService {
   async findByTeam(id: number): Promise< IMatchesDTO | null> {
     const resultMatches = await this.matchesModel.findOne({ where: { id } });
     return resultMatches;
+  }
+
+  async updateNewScore(id: number, score: IGoalsDTO): Promise<void> {
+    await this.matchesModel.update({ ...score }, { where: { id } });
   }
 }

@@ -5,6 +5,11 @@ const routes = express.Router();
 routes.patch('/:id/finish', (request, response, next) => {
   matchesListController.updateInProgress(request, response, next);
 });
+
+routes.patch('/:id', (request, response, next) => {
+  matchesListController.updateScore(request, response, next);
+});
+
 routes.get('/', (request, response, next) => {
   matchesListController.listAll(request, response, next);
 });

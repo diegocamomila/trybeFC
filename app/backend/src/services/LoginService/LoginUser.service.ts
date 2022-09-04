@@ -1,4 +1,3 @@
-import console = require('console');
 import { JwtPayload } from 'jsonwebtoken';
 import ObjError from '../../middlewares/objError';
 import IJwtToken from '../../providers/IJwtToken';
