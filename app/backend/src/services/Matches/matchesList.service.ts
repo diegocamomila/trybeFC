@@ -8,8 +8,8 @@ export default class MatchesListService {
   ) {}
 
   async executeListAll(): Promise<IMatchesListDTO[]> {
-    const reulteGetAllMatchers = await this.matchesService.listAll();
-    return reulteGetAllMatchers;
+    const reulteGetAllMatches = await this.matchesService.listAll();
+    return reulteGetAllMatches;
   }
 
   async executeSaveInProgress(data:IMatchesDTO): Promise<IMatchesDTO> {

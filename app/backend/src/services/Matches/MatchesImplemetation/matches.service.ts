@@ -9,16 +9,15 @@ import IMatchesService from './IMatches.service';
 
 export default class MatchesService implements IMatchesService {
   private matchesModel = Matches;
-  private teamModel = Team;
 
   async listAll(): Promise<IMatchesListDTO[]> {
-    const matchers = await this.matchesModel.findAll({
+    const matches = await this.matchesModel.findAll({
       include: [
         { model: Team, as: 'teamHome', attributes: ['teamName'] },
         { model: Team, as: 'teamAway', attributes: ['teamName'] },
       ],
     });
-    return matchers as unknown as IMatchesListDTO[];
+    return matches as unknown as IMatchesListDTO[];
   }
 
   async saveNewGame(dataGameInProgress:IMatchesDTO): Promise<IMatchesDTO> {

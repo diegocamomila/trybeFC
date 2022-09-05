@@ -8,6 +8,7 @@ export interface IMatchesDTO extends IGoalsDTO{
   homeTeam: number;
   awayTeam: number;
   inProgress?: boolean;
+  teamName?: string;
 }
 
 export interface IMatchesListDTO extends IGoalsDTO{

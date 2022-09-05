@@ -8,27 +8,26 @@
 // fontehttps://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
 // fontehttps://stackoverflow.com/questions/6913512/how-to-sort-an-array-of-objects-by-multiple-fields
 
-import MatchesModel from '../../../database/models/match';
+import Matches from '../../../database/models/match';
 import TeamModel from '../../../database/models/team';
-import ILeaderboardDTO from '../LeaderboardDTO.service';
 import ILeaderboardService from './ILeaderboard.service';
+import { ILeader } from '../LeaderboardDTO.service';
+// import statistic from './statisti';
 
 export default class LeaderboardService implements ILeaderboardService {
   private teamModel = TeamModel;
-  private matchesModel = MatchesModel;
 
-  async listLeaderboard(): Promise<ILeaderboardDTO[]> {
-    const matchers = await this.teamModel.findAll({
-      include: [
-        { model: this.matchesModel, as: 'awayTeam', where: { inProgress: 0 } },
-      ],
+  async listLeaderboard(): Promise<ILeader[]> {
+    const teamMatches = await this.teamModel.findAll({
+      include: [{
+        model: Matches,
+        as: 'homeTeam',
+        where: { inProgress: false },
+      }],
     });
-
-    return matchers;
+    const result = teamMatches as unknown as ILeader[];
+    // const resultStatic = statistic(result);
+    console.log(result);
+    return result;
   }
-
-  // async findById(id: number): Promise<ILeaderboardDTO | null> {
-  //   const leaderboard = await this.matchesModel.findOne({ where: { id } });
-  //   return leaderboard;
-  // }
 }
