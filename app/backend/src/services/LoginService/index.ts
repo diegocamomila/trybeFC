@@ -1,21 +1,13 @@
-import LoginUserController from '../../controllers/LoginUser.controller';
-import JwtToken from '../../providers/jwtToken';
-import LoginService from '../LoginImplementation/login.service';
-import LoginUserService from './LoginUser.service';
+import LoginController from '../../controllers/login.controller';
+import LoginService from './login.service';
 
-const logimService = new LoginService();
-const jwtToken = new JwtToken();
+export const loginService = new LoginService();
 
-export const loginUserService = new LoginUserService(
-  logimService,
-  jwtToken,
-);
-
-export const loginUserController = new LoginUserController(
-  loginUserService,
+export const loginController = new LoginController(
+  loginService,
 );
 
 export default {
-  loginUserService,
-  loginUserController,
+  loginService,
+  loginController,
 };

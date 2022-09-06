@@ -8,29 +8,29 @@
 // fontehttps://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
 // fontehttps://stackoverflow.com/questions/6913512/how-to-sort-an-array-of-objects-by-multiple-fields
 
-import Matches from '../../../database/models/match';
-import TeamModel from '../../../database/models/team';
-import ILeaderboardService from './ILeaderboard.service';
-import statistic3 from './statistica3';
-import { ITeamsMatches } from '../../TeamService/teamsDTO.service';
+// import Matches from '../../../database/models/match';
+// import TeamModel from '../../../database/models/team';
+// import ILeaderboardService from './ILeaderboard.service';
+// import statistic3 from './statistica3';
+// import { ITeamsMatches } from '../../TeamService/teamsDTO.service';
 
-export default class LeaderboardService implements ILeaderboardService {
-  private teamModel = TeamModel;
+// export default class LeaderboardService implements ILeaderboardService {
+//   private teamModel = TeamModel;
 
-  async listLeaderboard() {
-    const teamMatches = await this.teamModel.findAll({
-      include: [{
-        model: Matches,
-        as: 'homeTeam',
-        where: { inProgress: false },
-      }],
-    }) as unknown as ITeamsMatches[];
-    // eslint-disable-next-line new-cap
-    const organizaTeamMatchers = teamMatches.map((matches) => {
-      const ObjStatistic = new statistic3(matches);
-      return ObjStatistic.private(matches.homeTeamGoals, matches.awayTeamGoals);
-    });
-    console.log(organizaTeamMatchers);
-    return organizaTeamMatchers;
-  }
-}
+//   async listLeaderboard() {
+//     const teamMatches = await this.teamModel.findAll({
+//       include: [{
+//         model: Matches,
+//         as: 'homeTeam',
+//         where: { inProgress: false },
+//       }],
+//     }) as unknown as ITeamsMatches[];
+//     // eslint-disable-next-line new-cap
+//     const organizaTeamMatchers = teamMatches.map((matches) => {
+//       const ObjStatistic = new statistic3(matches);
+//       return ObjStatistic.private(matches.homeTeamGoals, matches.awayTeamGoals);
+//     });
+//     console.log(organizaTeamMatchers);
+//     return organizaTeamMatchers;
+//   }
+// }

@@ -1,18 +1,18 @@
-import LeaderboardListController from '../../controllers/LeaderboardList.controller';
-import LeaderboardListService from './LeaderboardList.service';
-import LeaderboardService from './LeaderboardImplemetation/leaderboard.service';
+// import LeaderboardListController from '../../controllers/LeaderboardList.controller';
+// import LeaderboardListService from './LeaderboardList.service';
+// import LeaderboardService from './LeaderboardImplemetation/leaderboard.service';
 
-const leaderboardService = new LeaderboardService();
+// const leaderboardService = new LeaderboardService();
 
-export const leaderboardListService = new LeaderboardListService(
-  leaderboardService,
-);
+// export const leaderboardListService = new LeaderboardListService(
+//   leaderboardService,
+// );
 
-export const leaderboardListController = new LeaderboardListController(
-  leaderboardListService,
-);
+// export const leaderboardListController = new LeaderboardListController(
+//   leaderboardListService,
+// );
 
-export default {
-  leaderboardListService,
-  leaderboardListController,
-};
+// export default {
+//   leaderboardListService,
+//   leaderboardListController,
+// };
