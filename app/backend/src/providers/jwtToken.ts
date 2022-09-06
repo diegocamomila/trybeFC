@@ -1,5 +1,4 @@
 import * as Jwt from 'jsonwebtoken';
-// import * as dotenv from 'dotenv';
 import * as bcrypt from 'bcryptjs';
 import { IUser } from '../interfaces/login.interface';
 

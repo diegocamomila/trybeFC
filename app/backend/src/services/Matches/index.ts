@@ -1,18 +1,18 @@
-import MatchesListController from '../../controllers/MatchesList.controller';
-import MatchesListService from './matchesList.service';
-import MatchesService from './MatchesImplemetation/matches.service';
+import MatchService from './match.service';
+import MatchController from '../../controllers/match.controller';
+import IMatchService from './Imatch.service';
 
-const matchesService = new MatchesService();
+export const iMatchService = new IMatchService();
 
-export const matchesListService = new MatchesListService(
-  matchesService,
+export const matchService = new MatchService(
+  iMatchService,
 );
 
-export const matchesListController = new MatchesListController(
-  matchesListService,
+export const matchController = new MatchController(
+  matchService,
 );
 
 export default {
-  matchesListService,
-  matchesListController,
+  matchService,
+  matchController,
 };

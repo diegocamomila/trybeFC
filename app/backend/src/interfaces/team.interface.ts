@@ -3,7 +3,7 @@ export type Team = {
   teamName: string;
 };
 
-export default interface ITeamsDTO {
+export default interface ITeam {
   id: number;
   teamName: string;
 }

@@ -37,7 +37,7 @@ export default class LoginService {
       throw new ObjError(402, 'Token not found');
     }
 
-    const validation = await this.jwtToken.validatePassword(token);
+    const validation = this.jwtToken.validatePassword(token);
     const { data } = validation as JwtPayload;
     return data.role;
   }

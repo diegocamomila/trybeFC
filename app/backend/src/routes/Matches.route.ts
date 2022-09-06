@@ -1,20 +1,21 @@
 import * as express from 'express';
-import { matchesListController } from '../services/Matches/index'; // puxar do index do servise
+// import validateToken from '../providers/validateToken';
+import { matchController } from '../services/Matches/index'; // puxar do index do servise
 
 const routes = express.Router();
 routes.patch('/:id/finish', (request, response, next) => {
-  matchesListController.updateInProgress(request, response, next);
+  matchController.handlerFinishMath(request, response, next);
 });
 
 routes.patch('/:id', (request, response, next) => {
-  matchesListController.updateScore(request, response, next);
+  matchController.handlerUpdate(request, response, next);
 });
 
 routes.get('/', (request, response, next) => {
-  matchesListController.listAll(request, response, next);
+  matchController.handlerFindAll(request, response, next);
 });
 
 routes.post('/', (request, response, next) => {
-  matchesListController.saveInProgress(request, response, next);
+  matchController.handlerAddMatch(request, response, next);
 });
 export default routes;
