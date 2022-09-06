@@ -2,7 +2,7 @@
 
 import { ILeader } from '../LeaderboardDTO.service';
 
-export default class statistica2 implements ILeader {
+export default class statistic3 implements ILeader {
   public teamName: string;
   public totalPoints = 0;
   public totalGames = 0;
@@ -15,22 +15,20 @@ export default class statistica2 implements ILeader {
   public efficiency = 0;
 
   constructor(props: ILeader) {
-    // Object.assign(this, props);
-    // totalPoints totalGames totalVictories totalDraws totalLosses goalsFavor goalsOwn goalsBalance efficiency
     this.teamName = props.teamName;
-    // this.totalPoints = props.totalPoints;
-    // this.totalGames = props.totalGames;
-    // this.totalVictories = props.totalVictories;
-    // this.totalDraws = props.totalDraws;
-    // this.totalLosses = props.totalLosses;
-    // this.goalsFavor = props.goalsFavor;
-    // this.goalsOwn = props.goalsOwn;
+    this.totalPoints = props.totalPoints;
+    this.totalGames = props.totalGames;
+    this.totalVictories = props.totalVictories;
+    this.totalDraws = props.totalDraws;
+    this.totalLosses = props.totalLosses;
+    this.goalsFavor = props.goalsFavor;
+    this.goalsOwn = props.goalsOwn;
 
     this.goalsBalance = this.goalsFavor - this.goalsOwn;
     this.efficiency = Number(((this.totalPoints / (this.totalGames * 3)) * 100).toFixed(2));
   }
 
-  private tabela(homeTeamGoals: number, awayTeamGoals: number) {
+  private(homeTeamGoals: number, awayTeamGoals: number) {
     if (homeTeamGoals > awayTeamGoals) this.totalPoints += 3; this.totalGames += 1;
     this.totalVictories += 1; this.goalsFavor += homeTeamGoals; this.goalsOwn += awayTeamGoals;
 

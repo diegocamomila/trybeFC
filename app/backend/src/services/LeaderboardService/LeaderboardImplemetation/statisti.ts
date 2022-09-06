@@ -1,10 +1,10 @@
 import { IMatchesDTO } from '../../Matches/matchesDTO.service';
 
-let totalPoints = 0;
 let totalGames = 0;
 let totalVictories = 0;
 let totalDraws = 0;
 let totalLossers = 0;
+let totalPoints = 0;
 let goalsFavor = 0;
 let goalsOwn = 0;
 let goalsBalancy = 0;

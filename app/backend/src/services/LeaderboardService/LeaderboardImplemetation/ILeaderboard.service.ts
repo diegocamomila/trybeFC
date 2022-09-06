@@ -1,5 +1,5 @@
-import statistica2 from './statistica2';
+import statistica3 from './statistica3';
 
 export default interface ILeaderboardService {
-  listLeaderboard(): Promise<statistica2[]>;
+  listLeaderboard(): Promise<statistica3[]>;
 }

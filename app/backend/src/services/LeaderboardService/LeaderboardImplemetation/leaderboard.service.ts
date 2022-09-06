@@ -11,22 +11,25 @@
 import Matches from '../../../database/models/match';
 import TeamModel from '../../../database/models/team';
 import ILeaderboardService from './ILeaderboard.service';
-import { ILeaderTeamDTO } from '../LeaderboardDTO.service';
-import statistica2 from './statistica2';
+import statistic3 from './statistica3';
+import { ITeamsMatches } from '../../TeamService/teamsDTO.service';
 
 export default class LeaderboardService implements ILeaderboardService {
   private teamModel = TeamModel;
 
   async listLeaderboard() {
     const teamMatches = await this.teamModel.findAll({
-      include: {
+      include: [{
         model: Matches,
         as: 'homeTeam',
         where: { inProgress: false },
-      },
-    }) as unknown as ILeaderTeamDTO[];
+      }],
+    }) as unknown as ITeamsMatches[];
     // eslint-disable-next-line new-cap
-    const organizaTeamMatchers = teamMatches.map((team) => new statistica2(team));
+    const organizaTeamMatchers = teamMatches.map((matches) => {
+      const ObjStatistic = new statistic3(matches);
+      return ObjStatistic.private(matches.homeTeamGoals, matches.awayTeamGoals);
+    });
     console.log(organizaTeamMatchers);
     return organizaTeamMatchers;
   }
