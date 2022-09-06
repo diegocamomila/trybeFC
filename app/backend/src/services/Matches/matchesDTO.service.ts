@@ -4,11 +4,11 @@ export interface IGoalsDTO {
 }
 
 export interface IMatchesDTO extends IGoalsDTO{
-  id?: number;
+  id: number;
+  teamName?: string;
   homeTeam: number;
   awayTeam: number;
-  inProgress?: boolean;
-  teamName?: string;
+  inProgress: boolean;
 }
 
 export interface IMatchesListDTO extends IGoalsDTO{

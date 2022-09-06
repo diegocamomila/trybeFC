@@ -1,5 +1,5 @@
-import { ILeader } from '../LeaderboardDTO.service';
+import statistica2 from './statistica2';
 
 export default interface ILeaderboardService {
-  listLeaderboard(): Promise<ILeader[]>;
+  listLeaderboard(): Promise<statistica2[]>;
 }

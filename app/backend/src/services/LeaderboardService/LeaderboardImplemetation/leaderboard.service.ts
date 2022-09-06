@@ -11,23 +11,23 @@
 import Matches from '../../../database/models/match';
 import TeamModel from '../../../database/models/team';
 import ILeaderboardService from './ILeaderboard.service';
-import { ILeader } from '../LeaderboardDTO.service';
-// import statistic from './statisti';
+import { ILeaderTeamDTO } from '../LeaderboardDTO.service';
+import statistica2 from './statistica2';
 
 export default class LeaderboardService implements ILeaderboardService {
   private teamModel = TeamModel;
 
-  async listLeaderboard(): Promise<ILeader[]> {
+  async listLeaderboard() {
     const teamMatches = await this.teamModel.findAll({
-      include: [{
+      include: {
         model: Matches,
         as: 'homeTeam',
         where: { inProgress: false },
-      }],
-    });
-    const result = teamMatches as unknown as ILeader[];
-    // const resultStatic = statistic(result);
-    console.log(result);
-    return result;
+      },
+    }) as unknown as ILeaderTeamDTO[];
+    // eslint-disable-next-line new-cap
+    const organizaTeamMatchers = teamMatches.map((team) => new statistica2(team));
+    console.log(organizaTeamMatchers);
+    return organizaTeamMatchers;
   }
 }

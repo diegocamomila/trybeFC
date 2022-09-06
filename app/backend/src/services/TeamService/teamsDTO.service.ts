@@ -3,7 +3,7 @@ export default interface ITeamsDTO {
   teamName: string;
 }
 
-export interface ITeamsMatches extends ITeamsDTO{
+export interface ITeamsMatches{
   id?: number;
   teamName: string;
   homeTeam: number;
