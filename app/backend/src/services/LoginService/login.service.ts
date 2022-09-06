@@ -8,8 +8,10 @@ import User from '../../database/models/user';
 import JwtToken from '../../providers/jwtToken';
 
 export default class LoginService {
-  private userModel = User;
-  private jwtToken = JwtToken;
+  constructor(
+    private userModel = User,
+    private jwtToken = JwtToken,
+  ) {}
 
   async checkUser(email: string, password: string): Promise<string> {
     if (!email || !password || password.length < 6) {

@@ -1,18 +1,13 @@
-import TeamsListController from '../../controllers/TeamsList.controller';
-import TeamsListService from './TeamsList.service';
-import TeamsService from './TeamsImplemetation/teans.service';
+import TeamService from './team.service';
+import TeamController from '../../controllers/team.controller';
 
-const teamsService = new TeamsService();
+export const teamService = new TeamService();
 
-export const teamsListService = new TeamsListService(
-  teamsService,
-);
-
-export const teamsListController = new TeamsListController(
-  teamsListService,
+export const teamController = new TeamController(
+  teamService,
 );
 
 export default {
-  teamsListService,
-  teamsListController,
+  teamService,
+  teamController,
 };
