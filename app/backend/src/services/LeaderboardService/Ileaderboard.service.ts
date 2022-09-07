@@ -20,8 +20,9 @@ export default class ILeaderboardService {
         .map((match) => ({ goalsFavor: match.homeTeamGoals, goalsOwn: match.awayTeamGoals }));
       return new Statistic4({ teamName: team.teamName, matches: board });
     });
-    const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
-    return sorted;
+    // const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
+    // return sorted;
+    return results as unknown as TLeaderboard[];
   }
 
   async FindAllAway(): Promise<TLeaderboard[]> {
@@ -33,7 +34,26 @@ export default class ILeaderboardService {
         .map((match) => ({ goalsFavor: match.awayTeamGoals, goalsOwn: match.homeTeamGoals }));
       return new Statistic4({ teamName: team.teamName, matches: board });
     });
-    const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
-    return sorted;
+    // const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
+    // return sorted;
+    return results as unknown as TLeaderboard[];
+  }
+
+  async FindAll() {
+    const teams = await this.teamModel.findAll();
+    const matches = await this.matchModel.findAll();
+    const results = teams.map((team) => {
+      const homeMatches = matches
+        .filter((match) => match.homeTeam === team.id && match.inProgress === false)
+        .map((match) => ({ goalsFavor: match.homeTeamGoals, goalsOwn: match.awayTeamGoals }));
+      const awayMatches = matches
+        .filter((match) => match.awayTeam === team.id && match.inProgress === false)
+        .map((match) => ({ goalsFavor: match.awayTeamGoals, goalsOwn: match.homeTeamGoals }));
+
+      const allMatches = [...homeMatches, ...awayMatches];
+
+      return new Statistic4({ teamName: team.teamName, matches: allMatches });
+    });
+    return results as unknown as TLeaderboard[];
   }
 }

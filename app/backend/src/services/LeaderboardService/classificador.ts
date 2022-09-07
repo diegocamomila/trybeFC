@@ -15,7 +15,7 @@ export default class Classification {
       if (a.goalsOwn > b.goalsOwn) return -1;
       return 0;
     });
-    console.log(results);
+    // console.log(results);
     return results;
   };
 }

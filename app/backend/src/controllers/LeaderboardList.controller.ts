@@ -24,12 +24,12 @@ export default class LeaderboardListController {
     }
   }
 
-  // async handlerFindAll(request: Request, response: Response, next: NextFunction) {
-  //   try {
-  //     const sorted = await this.leaderboardListService.executeFindAll();
-  //     return response.status(200).json(sorted);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  async handlerFindAll(request: Request, response: Response, next: NextFunction) {
+    try {
+      const sorted = await this.leaderboardListService.executeFindAll();
+      return response.status(200).json(sorted);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
