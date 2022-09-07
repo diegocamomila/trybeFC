@@ -1,18 +1,21 @@
-// import LeaderboardListController from '../../controllers/LeaderboardList.controller';
-// import LeaderboardListService from './LeaderboardList.service';
-// import LeaderboardService from './LeaderboardImplemetation/leaderboard.service';
+import LeaderboardController from '../../controllers/LeaderboardList.controller';
+import LeaderboardService from './leaderboard.service';
+import OrderBoard from './order';
+import Statistic4 from './statistic';
 
-// const leaderboardService = new LeaderboardService();
+export const statistic4 = new Statistic4({ teamName, matches });
+export const orderBoard = new OrderBoard();
 
-// export const leaderboardListService = new LeaderboardListService(
-//   leaderboardService,
-// );
+export const leaderboardService = new LeaderboardService(
+  statistic4,
+  orderBoard,
+);
 
-// export const leaderboardListController = new LeaderboardListController(
-//   leaderboardListService,
-// );
+export const leaderboardController = new LeaderboardController(
+  leaderboardService,
+);
 
-// export default {
-//   leaderboardListService,
-//   leaderboardListController,
-// };
+export default {
+  leaderboardService,
+  leaderboardController,
+};
