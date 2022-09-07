@@ -1,4 +1,4 @@
-import { TLeaderboard } from '../../interfaces/leaderboard.interface';
+import { IGoals, ITeamMatch } from '../../interfaces/leaderboard.interface';
 
 export default class Statistic4 {
   public name: string;
@@ -12,7 +12,7 @@ export default class Statistic4 {
   public goalsBalance: number;
   public efficiency: number;
 
-  constructor({ teamName, matches }) {
+  constructor({ teamName, matches }: ITeamMatch) {
     this.name = teamName;
     this.totalGames = matches.length;
     this.totalPoints = Statistic4.calcPoints(matches);
@@ -25,7 +25,7 @@ export default class Statistic4 {
     this.efficiency = Number(((this.totalPoints / (matches.length * 3)) * 100).toFixed(2));
   }
 
-  static calcPoints(matches:TLeaderboard[]) {
+  static calcPoints(matches: IGoals[]) {
     return matches.reduce((totalPoints, match) => {
       if (match.goalsFavor > match.goalsOwn) return totalPoints + 3;
       if (match.goalsFavor === match.goalsOwn) return totalPoints + 1;
@@ -33,32 +33,32 @@ export default class Statistic4 {
     }, 0);
   }
 
-  static calcVictories(matches:TLeaderboard[]) {
+  static calcVictories(matches: IGoals[]) {
     return matches.reduce((totalVictories, match) => {
       if (match.goalsFavor > match.goalsOwn) return totalVictories + 1;
       return totalVictories;
     }, 0);
   }
 
-  static calcDraws(matches:TLeaderboard[]) {
+  static calcDraws(matches: IGoals[]) {
     return matches.reduce((totalDraws, match) => {
       if (match.goalsFavor === match.goalsOwn) return totalDraws + 1;
       return totalDraws;
     }, 0);
   }
 
-  static calcLosses(matches:TLeaderboard[]) {
+  static calcLosses(matches: IGoals[]) {
     return matches.reduce((totalLosses, match) => {
       if (match.goalsFavor < match.goalsOwn) return totalLosses + 1;
       return totalLosses;
     }, 0);
   }
 
-  static calcGoalsFavor(matches:TLeaderboard[]) {
+  static calcGoalsFavor(matches:IGoals[]) {
     return matches.reduce((goalsFavor, match) => goalsFavor + match.goalsFavor, 0);
   }
 
-  static calcGoalsOwn(matches:TLeaderboard[]) {
+  static calcGoalsOwn(matches: IGoals[]) {
     return matches.reduce((goalsOwn, match) => goalsOwn + match.goalsOwn, 0);
   }
 }

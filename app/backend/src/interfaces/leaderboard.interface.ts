@@ -23,3 +23,13 @@ export default interface ILeaderboard {
   goalsBalance: number;
   efficiency: string;
 }
+
+export interface ITeamMatch {
+  teamName: string;
+  matches: IGoals[];
+}
+
+export interface IGoals {
+  goalsFavor: number;
+  goalsOwn: number
+}

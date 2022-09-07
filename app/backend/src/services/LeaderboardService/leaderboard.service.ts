@@ -4,6 +4,7 @@ import Statistic4 from './statistic';
 import { TLeaderboard } from '../../interfaces/leaderboard.interface';
 
 export default class LeaderboardServices {
+  static classificador: any;
   constructor(
     private teamModel = Team,
     private matchModel = Match,
@@ -18,7 +19,7 @@ export default class LeaderboardServices {
         .map((match) => ({ goalsFavor: match.homeTeamGoals, goalsOwn: match.awayTeamGoals }));
       return new Statistic4({ teamName: team.teamName, matches: board });
     });
-    const sorted = this.executeFindAll.classificador(results);
+    const sorted = LeaderboardServices.classificador(results);
     return sorted;
   }
 }
