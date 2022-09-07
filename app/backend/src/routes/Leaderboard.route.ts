@@ -4,7 +4,11 @@ import { leaderboardController } from '../services/LeaderboardService/index'; //
 const routes = express.Router();
 
 routes.get('/home', (request, response, next) => {
-  leaderboardController.handlerFindAll(request, response, next);
+  leaderboardController.handlerFindAllHome(request, response, next);
+});
+
+routes.get('/away', (request, response, next) => {
+  leaderboardController.handlerFindAllAway(request, response, next);
 });
 
 export default routes;

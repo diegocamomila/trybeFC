@@ -11,13 +11,26 @@ export default class LeaderboardServices {
     private cassification = Classification,
   ) {}
 
-  async executeFindAll(): Promise<TLeaderboard[]> {
+  async executeFindAllHome(): Promise<TLeaderboard[]> {
     const teams = await this.teamModel.findAll();
     const matches = await this.matchModel.findAll();
     const results = teams.map((team) => {
       const board = matches
         .filter((match) => match.homeTeam === team.id && match.inProgress === false)
         .map((match) => ({ goalsFavor: match.homeTeamGoals, goalsOwn: match.awayTeamGoals }));
+      return new Statistic4({ teamName: team.teamName, matches: board });
+    });
+    const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
+    return sorted;
+  }
+
+  async executeFindAllAway(): Promise<TLeaderboard[]> {
+    const teams = await this.teamModel.findAll();
+    const matches = await this.matchModel.findAll();
+    const results = teams.map((team) => {
+      const board = matches
+        .filter((match) => match.awayTeam === team.id && match.inProgress === false)
+        .map((match) => ({ goalsFavor: match.awayTeamGoals, goalsOwn: match.homeTeamGoals }));
       return new Statistic4({ teamName: team.teamName, matches: board });
     });
     const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);

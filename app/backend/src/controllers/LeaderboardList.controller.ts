@@ -6,9 +6,18 @@ export default class LeaderboardListController {
     private leaderboardListService: LeaderboardListService,
   ) {}
 
-  async handlerFindAll(request: Request, response: Response, next: NextFunction) {
+  async handlerFindAllHome(request: Request, response: Response, next: NextFunction) {
     try {
-      const sorted = await this.leaderboardListService.executeFindAll();
+      const sorted = await this.leaderboardListService.executeFindAllHome();
+      return response.status(200).json(sorted);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async handlerFindAllAway(request: Request, response: Response, next: NextFunction) {
+    try {
+      const sorted = await this.leaderboardListService.executeFindAllAway();
       return response.status(200).json(sorted);
     } catch (error) {
       next(error);
