@@ -1,39 +1,18 @@
-import Team from '../../database/models/team';
-import Match from '../../database/models/match';
-import Statistic4 from './statistic4';
 import { TLeaderboard } from '../../interfaces/leaderboard.interface';
-import Classification from './classificador';
+import ILeaderboardService from './Ileaderboard.service';
 
 export default class LeaderboardServices {
   constructor(
-    private teamModel = Team,
-    private matchModel = Match,
-    private cassification = Classification,
+    private landerboarService: ILeaderboardService,
   ) {}
 
   async executeFindAllHome(): Promise<TLeaderboard[]> {
-    const teams = await this.teamModel.findAll();
-    const matches = await this.matchModel.findAll();
-    const results = teams.map((team) => {
-      const board = matches
-        .filter((match) => match.homeTeam === team.id && match.inProgress === false)
-        .map((match) => ({ goalsFavor: match.homeTeamGoals, goalsOwn: match.awayTeamGoals }));
-      return new Statistic4({ teamName: team.teamName, matches: board });
-    });
-    const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
-    return sorted;
+    const resultFindAllHome = await this.landerboarService.FindAllHome();
+    return resultFindAllHome;
   }
 
   async executeFindAllAway(): Promise<TLeaderboard[]> {
-    const teams = await this.teamModel.findAll();
-    const matches = await this.matchModel.findAll();
-    const results = teams.map((team) => {
-      const board = matches
-        .filter((match) => match.awayTeam === team.id && match.inProgress === false)
-        .map((match) => ({ goalsFavor: match.awayTeamGoals, goalsOwn: match.homeTeamGoals }));
-      return new Statistic4({ teamName: team.teamName, matches: board });
-    });
-    const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
-    return sorted;
+    const resultFindAllAway = await this.landerboarService.FindAllAway();
+    return resultFindAllAway;
   }
 }

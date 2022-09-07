@@ -11,4 +11,8 @@ routes.get('/away', (request, response, next) => {
   leaderboardController.handlerFindAllAway(request, response, next);
 });
 
+// routes.get('/', (request, response, next) => {
+//   leaderboardController.handlerFindAll(request, response, next);
+// });
+
 export default routes;
