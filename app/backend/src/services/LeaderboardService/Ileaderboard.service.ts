@@ -1,17 +1,14 @@
 import Team from '../../database/models/team';
 import Match from '../../database/models/match';
-import Statistic4 from './statistic4';
-import { TLeaderboard } from '../../interfaces/leaderboard.interface';
-import Classification from './classificador';
+import Statistic4 from '../../providers/statistic4';
 
 export default class ILeaderboardService {
   constructor(
     private teamModel = Team,
     private matchModel = Match,
-    private cassification = Classification,
   ) {}
 
-  async FindAllHome(): Promise<TLeaderboard[]> {
+  async FindAllHome() {
     const teams = await this.teamModel.findAll();
     const matches = await this.matchModel.findAll();
     const results = teams.map((team) => {
@@ -22,10 +19,10 @@ export default class ILeaderboardService {
     });
     // const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
     // return sorted;
-    return results as unknown as TLeaderboard[];
+    return results;
   }
 
-  async FindAllAway(): Promise<TLeaderboard[]> {
+  async FindAllAway() {
     const teams = await this.teamModel.findAll();
     const matches = await this.matchModel.findAll();
     const results = teams.map((team) => {
@@ -36,7 +33,7 @@ export default class ILeaderboardService {
     });
     // const sorted = this.cassification.classific(results as unknown as TLeaderboard[]);
     // return sorted;
-    return results as unknown as TLeaderboard[];
+    return results;
   }
 
   async FindAll() {
@@ -54,6 +51,6 @@ export default class ILeaderboardService {
 
       return new Statistic4({ teamName: team.teamName, matches: allMatches });
     });
-    return results as unknown as TLeaderboard[];
+    return results;
   }
 }

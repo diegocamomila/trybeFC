@@ -1,4 +1,4 @@
-import { IGoals, ITeamMatch } from '../../interfaces/leaderboard.interface';
+import { IGoals, ITeamMatch } from '../interfaces/leaderboard.interface';
 
 export default class Statistic4 {
   public name: string;

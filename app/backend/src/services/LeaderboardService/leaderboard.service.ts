@@ -1,5 +1,5 @@
 import { TLeaderboard } from '../../interfaces/leaderboard.interface';
-import Classification from './classificador';
+import Classification from '../../providers/classificador';
 import ILeaderboardService from './Ileaderboard.service';
 
 export default class LeaderboardServices {

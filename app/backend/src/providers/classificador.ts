@@ -1,4 +1,4 @@
-import { TLeaderboard } from '../../interfaces/leaderboard.interface';
+import { TLeaderboard } from '../interfaces/leaderboard.interface';
 
 export default class Classification {
   static classific = (data: TLeaderboard[]) => {

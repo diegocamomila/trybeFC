@@ -8,7 +8,7 @@ export type TLeaderboard = {
   goalsFavor: number;
   goalsOwn: number;
   goalsBalance: number;
-  efficiency: string
+  efficiency: number
 };
 
 export default interface ILeaderboard {
@@ -21,7 +21,7 @@ export default interface ILeaderboard {
   goalsFavor: number;
   goalsOwn: number;
   goalsBalance: number;
-  efficiency: string;
+  efficiency: number;
 }
 
 export interface ITeamMatch {
