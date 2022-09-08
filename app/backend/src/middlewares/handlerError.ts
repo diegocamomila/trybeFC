@@ -5,6 +5,7 @@ const HandlerError: ErrorRequestHandler = (err, _req, res, _next) => {
 
   if (err.statusCode) return res.status(err.statusCode).json({ message: err.message });
 
-  return res.status(500).json({ err: err.message });
+  return res.status(500).json('internal serve error');
+  // return res.status(500).json({ err: err.message });
 };
 export default HandlerError;

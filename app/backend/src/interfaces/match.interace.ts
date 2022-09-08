@@ -26,12 +26,6 @@ export interface IMatch {
   homeTeam: number;
   awayTeam: number;
   inProgress?: boolean;
-  teamHome?: ITeam;
-  awayHome?: ITeam;
+  teamHome?: ITeam | string;
+  awayHome?: ITeam | string;
 }
-
-// export interface IMatchesListDTO extends IGoalsDTO{
-//   inProgress: boolean;
-//   teamHome: { teamName: string };
-//   teamAway: { teamName: string };
-// }
