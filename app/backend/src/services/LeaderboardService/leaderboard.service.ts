@@ -1,28 +1,33 @@
-import { TLeaderboard } from '../../interfaces/leaderboard.interface';
+// import LeaderboardDTO from '../../interfaces/leaderboard.interface';
 import Classification from '../../providers/classificador';
-import ILeaderboardService from './Ileaderboard.service';
+import ILeaderboardMethodo from './ILeaderboardMethodo';
 
 export default class LeaderboardServices {
+  private landerboarMethodo: ILeaderboardMethodo;
+  private cassification: Classification;
   constructor(
-    private landerboarService: ILeaderboardService,
-    private cassification = Classification,
-  ) {}
+    landerboarMethodo: ILeaderboardMethodo,
+    cassification: Classification,
+  ) {
+    this.landerboarMethodo = landerboarMethodo;
+    this.cassification = cassification;
+  }
 
-  async executeFindAllHome(): Promise<TLeaderboard[]> {
-    const resultFindAllHome = await this.landerboarService.FindAllHome();
-    const sorted = this.cassification.classific(resultFindAllHome as unknown as TLeaderboard[]);
+  async executeFindAllHome() {
+    const resultFindAllHome = await this.landerboarMethodo.FindAllHome();
+    const sorted = this.cassification.classific(resultFindAllHome);
     return sorted;
   }
 
-  async executeFindAllAway(): Promise<TLeaderboard[]> {
-    const resultFindAllAway = await this.landerboarService.FindAllAway();
-    const sorted = this.cassification.classific(resultFindAllAway as unknown as TLeaderboard[]);
+  async executeFindAllAway() {
+    const resultFindAllAway = await this.landerboarMethodo.FindAllAway();
+    const sorted = this.cassification.classific(resultFindAllAway);
     return sorted;
   }
 
-  async executeFindAll(): Promise<TLeaderboard[]> {
-    const resultFindAllAway = await this.landerboarService.FindAll();
-    const sorted = this.cassification.classific(resultFindAllAway as unknown as TLeaderboard[]);
+  async executeFindAll() {
+    const resultFindAllAway = await this.landerboarMethodo.FindAll();
+    const sorted = this.cassification.classific(resultFindAllAway);
     return sorted;
   }
 }

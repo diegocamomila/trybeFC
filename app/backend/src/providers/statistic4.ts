@@ -1,4 +1,4 @@
-import { IGoals, ITeamMatch } from '../interfaces/leaderboard.interface';
+import { GoalsDTO, TeamMatchDTO } from '../interfaces/leaderboard.interface';
 
 export default class Statistic4 {
   public name: string;
@@ -12,7 +12,7 @@ export default class Statistic4 {
   public goalsBalance: number;
   public efficiency: number;
 
-  constructor({ teamName, matches }: ITeamMatch) {
+  constructor({ teamName, matches }: TeamMatchDTO) {
     this.name = teamName;
     this.totalGames = matches.length;
     this.totalPoints = Statistic4.calcPoints(matches);
@@ -25,7 +25,7 @@ export default class Statistic4 {
     this.efficiency = Number(((this.totalPoints / (matches.length * 3)) * 100).toFixed(2));
   }
 
-  static calcPoints(matches: IGoals[]) {
+  static calcPoints(matches: GoalsDTO[]) {
     return matches.reduce((totalPoints, match) => {
       if (match.goalsFavor > match.goalsOwn) return totalPoints + 3;
       if (match.goalsFavor === match.goalsOwn) return totalPoints + 1;
@@ -33,32 +33,32 @@ export default class Statistic4 {
     }, 0);
   }
 
-  static calcVictories(matches: IGoals[]) {
+  static calcVictories(matches: GoalsDTO[]) {
     return matches.reduce((totalVictories, match) => {
       if (match.goalsFavor > match.goalsOwn) return totalVictories + 1;
       return totalVictories;
     }, 0);
   }
 
-  static calcDraws(matches: IGoals[]) {
+  static calcDraws(matches: GoalsDTO[]) {
     return matches.reduce((totalDraws, match) => {
       if (match.goalsFavor === match.goalsOwn) return totalDraws + 1;
       return totalDraws;
     }, 0);
   }
 
-  static calcLosses(matches: IGoals[]) {
+  static calcLosses(matches: GoalsDTO[]) {
     return matches.reduce((totalLosses, match) => {
       if (match.goalsFavor < match.goalsOwn) return totalLosses + 1;
       return totalLosses;
     }, 0);
   }
 
-  static calcGoalsFavor(matches:IGoals[]) {
+  static calcGoalsFavor(matches:GoalsDTO[]) {
     return matches.reduce((goalsFavor, match) => goalsFavor + match.goalsFavor, 0);
   }
 
-  static calcGoalsOwn(matches: IGoals[]) {
+  static calcGoalsOwn(matches: GoalsDTO[]) {
     return matches.reduce((goalsOwn, match) => goalsOwn + match.goalsOwn, 0);
   }
 }

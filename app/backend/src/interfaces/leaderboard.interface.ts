@@ -1,4 +1,4 @@
-export type TLeaderboard = {
+export interface LeaderboardDTO {
   name: string;
   totalPoints: number;
   totalGames: number;
@@ -9,27 +9,14 @@ export type TLeaderboard = {
   goalsOwn: number;
   goalsBalance: number;
   efficiency: number
-};
-
-export default interface ILeaderboard {
-  name: string;
-  totalPoints: number;
-  totalGames: number;
-  totalVictories: number;
-  totalDraws: number;
-  totalLosses: number;
-  goalsFavor: number;
-  goalsOwn: number;
-  goalsBalance: number;
-  efficiency: number;
 }
 
-export interface ITeamMatch {
+export interface TeamMatchDTO {
   teamName: string;
-  matches: IGoals[];
+  matches: GoalsDTO[];
 }
 
-export interface IGoals {
+export interface GoalsDTO {
   goalsFavor: number;
   goalsOwn: number
 }

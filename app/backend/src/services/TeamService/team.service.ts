@@ -7,9 +7,12 @@ import ObjError from '../../middlewares/objError';
 import Team from '../../database/models/team';
 
 export default class TeamsService {
+  private teamModel: typeof Team;
   constructor(
-    private teamModel = Team,
-  ) {}
+    teamModel: typeof Team,
+  ) {
+    this.teamModel = teamModel;
+  }
 
   async executeFindAll() {
     const teams = await this.teamModel.findAll();

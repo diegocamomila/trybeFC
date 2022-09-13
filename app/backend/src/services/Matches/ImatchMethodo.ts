@@ -2,7 +2,7 @@
 // fonte https://medium.com/@matheusbessa_44838/princípios-solid-com-typescript-4f8a9d5d1ef8
 // monitoria do carro da ajuda
 
-import { MatchGoal, TMatch } from '../../interfaces/match.interace';
+import { MatchGoalDTO, MatchDTO } from '../../interfaces/match.interace';
 import Team from '../../database/models/team';
 import Match from '../../database/models/match';
 
@@ -19,7 +19,7 @@ export default class MatchesService {
     return matches;
   }
 
-  async saveNewGame(dataGameInProgress: TMatch) {
+  async saveNewGame(dataGameInProgress: MatchDTO) {
     const Game = await this.matchModel.create({ ...dataGameInProgress, inProgress: true });
     return Game;
   }
@@ -33,7 +33,7 @@ export default class MatchesService {
     return resultMatches;
   }
 
-  async updateNewScore(id: number, score: MatchGoal) {
+  async updateNewScore(id: number, score: MatchGoalDTO) {
     await this.matchModel.update({ ...score }, { where: { id } });
   }
 }

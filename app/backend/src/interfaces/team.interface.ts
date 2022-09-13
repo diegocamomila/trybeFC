@@ -1,9 +1,4 @@
-export type Team = {
-  id: number;
-  teamName: string;
-};
-
-export default interface ITeam {
+export default interface ITeamDTO {
   id: number;
   teamName: string;
 }

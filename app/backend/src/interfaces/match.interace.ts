@@ -1,26 +1,11 @@
 import ITeam from './team.interface';
 
-export type MatchGoal = {
-  homeTeamGoals: number,
-  awayTeamGoals: number,
-};
-
-export interface IMatcGoal {
+export interface MatchGoalDTO {
   homeTeamGoals: number;
   awayTeamGoals: number;
 }
 
-export type TMatch = {
-  id?: number;
-  teamName?: string;
-  homeTeam: number;
-  awayTeam: number;
-  inProgress?: boolean;
-  teamHome?: ITeam;
-  awayHome?: ITeam;
-};
-
-export interface IMatch {
+export interface MatchDTO {
   id?: number;
   teamName?: string;
   homeTeam: number;

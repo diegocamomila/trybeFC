@@ -1,22 +1,9 @@
-export type Login = {
-  email: string;
-  password: string;
-};
-
-export interface ILogin {
+export interface LoginDTO {
   email: string;
   password: string;
 }
 
-export type User = {
-  id: number;
-  username: string;
-  role: string;
-  email: string;
-  password: string;
-};
-
-export interface IUser {
+export interface UserDTO {
   id?: number;
   username: string;
   role: string;

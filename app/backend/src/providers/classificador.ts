@@ -1,7 +1,7 @@
-import { TLeaderboard } from '../interfaces/leaderboard.interface';
+import { LeaderboardDTO } from '../interfaces/leaderboard.interface';
 
 export default class Classification {
-  static classific = (data: TLeaderboard[]) => {
+  classific = (data: LeaderboardDTO[]) => {
     const results = data.sort((a, b) => {
       if (a.totalPoints < b.totalPoints) return 1;
       if (a.totalPoints > b.totalPoints) return -1;

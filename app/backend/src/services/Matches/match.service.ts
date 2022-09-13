@@ -1,23 +1,28 @@
 // import { JwtPayload } from 'jsonwebtoken';
-import IMatchService from './Imatch.service';
+import MatchMethodo from './ImatchMethodo';
 import ObjError from '../../middlewares/objError';
 import JwtToken from '../../providers/jwtToken';
-import { TMatch, MatchGoal } from '../../interfaces/match.interace';
+import { MatchDTO, MatchGoalDTO } from '../../interfaces/match.interace';
 
 export default class MatchesListService {
+  private matchMethodo: MatchMethodo;
+  private jwtToken: JwtToken;
   constructor(
-    private matchService: IMatchService,
-    private jwtToken = JwtToken,
-  ) {}
+    matchService: MatchMethodo,
+    jwtToken: JwtToken,
+  ) {
+    this.matchMethodo = matchService;
+    this.jwtToken = jwtToken;
+  }
 
   async executeFindAll() {
-    const reulteGetAllMatches = await this.matchService.FindAll();
+    const reulteGetAllMatches = await this.matchMethodo.FindAll();
     return reulteGetAllMatches;
   }
 
-  async executeAddMatch(data:TMatch, authorization:string | undefined) {
-    const resultHomeTeam = await this.matchService.findByTeam(data.homeTeam);
-    const resultAwayTeam = await this.matchService.findByTeam(data.awayTeam);
+  async executeAddMatch(data:MatchDTO, authorization:string | undefined) {
+    const resultHomeTeam = await this.matchMethodo.findByTeam(data.homeTeam);
+    const resultAwayTeam = await this.matchMethodo.findByTeam(data.awayTeam);
 
     if (data.homeTeam === data.awayTeam) {
       throw new ObjError(401, 'It is not possible to create a match with two equal teams');
@@ -34,15 +39,15 @@ export default class MatchesListService {
     // if (!user) {
     //   throw new ObjError(401, 'Token must be a valid token');
     // }
-    const newGameInProgress = await this.matchService.saveNewGame(data);
+    const newGameInProgress = await this.matchMethodo.saveNewGame(data);
     return newGameInProgress;
   }
 
   async executeFinishMath(id: number) {
-    await this.matchService.updateNewGame(id);
+    await this.matchMethodo.updateNewGame(id);
   }
 
-  async executeUpdate(id: number, score: MatchGoal) {
-    await this.matchService.updateNewScore(id, score);
+  async executeUpdate(id: number, score: MatchGoalDTO) {
+    await this.matchMethodo.updateNewScore(id, score);
   }
 }

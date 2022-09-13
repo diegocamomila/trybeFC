@@ -1,11 +1,15 @@
+import Classification from '../../providers/classificador';
 import LeaderboardController from '../../controllers/LeaderboardList.controller';
-import ILeaderboardService from './Ileaderboard.service';
+import ILeaderboardMethodo from './ILeaderboardMethodo';
 import LeaderboardService from './leaderboard.service';
 
-export const iLeaderboardService = new ILeaderboardService();
+export const cassification = new Classification();
+
+export const iLeaderboardMethodo = new ILeaderboardMethodo();
 
 export const leaderboardService = new LeaderboardService(
-  iLeaderboardService,
+  iLeaderboardMethodo,
+  cassification,
 );
 
 export const leaderboardController = new LeaderboardController(
